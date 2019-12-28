@@ -2,29 +2,29 @@
 
 namespace Transportation
 {
-  public class Flight : ITransport
+  public class Flight : Transport
   {
-    public string flightNumber { get; set; } //номер рейса
-    public string gateNumber { get; set; } //gate
-    public string seatNumber { get; set; } // место
-    public string baggageCounter { get; set; } // baggage instructions
-    public string baggageInstructions { get; set; } // baggage instructions
+    public string FlightNumber { get; set; } //номер рейса
+    public string GateNumber { get; set; } //gate
+    public string SeatNumber { get; set; } // место
+    public string BaggageCounter { get; set; } // baggage instructions
+    public string BaggageInstructions { get; set; } // baggage instructions
 
-    public string getInstruction(string fromStation, string toStation)
+    public override string getInstruction(string fromStation, string toStation)
     {
-      string baggageText = String.Empty;
+      string baggageText = String.Empty; //do I need a stringbuilder for a few concatenations?
 
-      if (false == String.IsNullOrEmpty(baggageCounter))
+      if (false == String.IsNullOrEmpty(BaggageCounter))
       {
-        baggageText += $" Baggage drop at ticket counter {baggageCounter}.";
+        baggageText += $" Baggage drop at ticket counter {BaggageCounter}.";
       }
 
-      if (false == String.IsNullOrEmpty(baggageInstructions))
+      if (false == String.IsNullOrEmpty(BaggageInstructions))
       {
-        baggageText += $" {baggageInstructions}";
+        baggageText += $" {BaggageInstructions}";
       }
 
-      return $"From {fromStation}, take flight {flightNumber} to {toStation}. Gate {gateNumber}. Seat {seatNumber}.{baggageText}";
+      return $"From {fromStation} take flight {FlightNumber} to {toStation}. Gate {GateNumber}. Seat {SeatNumber}.{baggageText}";
     }
   }
 }
