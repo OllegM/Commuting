@@ -1,16 +1,25 @@
 using System;
+using System.Runtime.Serialization;
 
-namespace Transportation {
-  public class Ticket
+namespace Transportation
+{
+  public class Ticket<T> where T : Transport
   {
-    private readonly Transport _transport;
-    public Ticket(Transport transport)
+    private readonly T _transport;
+    public Ticket(T transport)
     {
       _transport = transport;
     }
 
-    public string FromStation {get; set;}
-    public string ToStation {get; set;}
+    public T Transport
+    {
+      get
+      {
+        return _transport;
+      }
+    }
+    public string FromStation { get; set; }
+    public string ToStation { get; set; }
 
     public string PrintInstructions()
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace Transportation
 {
@@ -7,7 +8,7 @@ namespace Transportation
   {
     static void Main(string[] args)
     {
-      List<Ticket> tickets = new List<Ticket>();
+      var tickets = new List<Ticket<Transport>>();
 
       Train train = new Train()
       {
@@ -24,36 +25,47 @@ namespace Transportation
         BaggageCounter = "58"
       };
 
-      tickets.Add(new Ticket(flight)
+      tickets.Add(new Ticket<Transport>(flight)
       {
         FromStation = "4 Helsinki",
         ToStation = "5 Rovaniemi"
       });
 
-      tickets.Add(new Ticket(train)
+      tickets.Add(new Ticket<Transport>(train)
       {
         FromStation = "3 SPb",
         ToStation = "4 Helsinki"
       });
 
-      tickets.Add(new Ticket(train)
+      tickets.Add(new Ticket<Transport>(train)
       {
         FromStation = "2 Moscow",
         ToStation = "3 SPb"
       });
 
-      tickets.Add(new Ticket(train)
+      tickets.Add(new Ticket<Transport>(train)
       {
         FromStation = "1 Novosibirsk",
         ToStation = "2 Moscow"
       });
 
-      Sorter.SortTickets(tickets);
+      Sorter<Transport>.SortTickets(tickets);
 
-      foreach (var ticket in tickets)
-      {
-        Console.WriteLine(ticket.PrintInstructions());
-      }
+      //   foreach (var ticket in tickets)
+      //   {
+      //     Console.WriteLine(ticket.PrintInstructions());
+      //   }
+
+    //   Ticket<Flight> tf = new Ticket<Flight>(flight)
+    //   {
+    //     FromStation = "1 Novosibirsk",
+    //     ToStation = "2 Moscow"
+    //   };
+    //   Console.WriteLine(JsonSerializer.Serialize<Ticket<Flight>>(tf, null));
+        Console.WriteLine(JsonSerializer.Serialize<List<Ticket<Transport>>> (tickets, 
+        new JsonSerializerOptions() {
+
+        }));
     }
   }
 }

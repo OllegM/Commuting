@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Transportation
 {
+  [KnownType(typeof(Flight))]
   public class Flight : Transport
   {
     public string FlightNumber { get; set; } //номер рейса
     public string GateNumber { get; set; } //gate
     public string SeatNumber { get; set; } // место
-    public string BaggageCounter { get; set; } // baggage instructions
-    public string BaggageInstructions { get; set; } // baggage instructions
+    public string BaggageCounter { get; set; } // стойка регистрации
+    public string BaggageInstructions { get; set; } // инструкции для багажа
 
     public override string getInstruction(string fromStation, string toStation)
     {
-      string baggageText = String.Empty; //do I need a stringbuilder for a few concatenations?
+      string baggageText = String.Empty; //нужен ли stringbuilder для пары сложений?
 
       if (false == String.IsNullOrEmpty(BaggageCounter))
       {
@@ -24,7 +26,7 @@ namespace Transportation
         baggageText += $" {BaggageInstructions}";
       }
 
-      return $"From {fromStation} take flight {FlightNumber} to {toStation}. Gate {GateNumber}. Seat {SeatNumber}.{baggageText}";
+      return $"From {fromStation}, take flight {FlightNumber} to {toStation}. Gate {GateNumber}. Seat {SeatNumber}.{baggageText}";
     }
   }
 }

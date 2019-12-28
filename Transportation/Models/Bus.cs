@@ -1,6 +1,8 @@
 using System;
+using System.Runtime.Serialization;
 
 namespace Transportation {
+  [KnownType(typeof(Bus))]
   public class Bus : Transport
   {
     public string BusNumber { get; set; } //номер автобуса

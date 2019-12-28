@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Transportation
 {
-  public class Sorter
+  public class Sorter<T> where T: Transport
   {
-    public static void SortTickets(List<Ticket> tickets)
+    public static void SortTickets(List<Ticket<T>> tickets)
     {
       int counter = 0;
       if (tickets.Count <= 1)
@@ -21,8 +21,8 @@ namespace Transportation
         counter ++;
         for (int i = 0; i < tickets.Count - 1; i++)
         {
-          Ticket first = tickets[i];
-          Ticket second = tickets[i + 1];
+          Ticket<T> first = tickets[i];
+          Ticket<T> second = tickets[i + 1];
           if (false == String.Equals(first.ToStation, second.FromStation, StringComparison.InvariantCultureIgnoreCase))
           {
             tickets[i + 1] = first;
