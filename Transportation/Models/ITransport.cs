@@ -2,7 +2,7 @@
 
 namespace Transportation
 {
-  public interface ITransport<T>
+  public interface ITransport
   {
     public string getInstruction(string fromStation, string Transportation);
   }
