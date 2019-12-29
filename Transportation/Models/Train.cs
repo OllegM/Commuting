@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 
 namespace Transportation {
-  [KnownType(typeof(Train))]
   public class Train : Transport
   {
     public string TrainNumber { get; set; } //номер поезда
@@ -10,7 +9,7 @@ namespace Transportation {
     public string SeatNumber {get; set;} // место
 
     public override string getInstruction (string fromStation, string toStation) {
-      return $"Take train {TrainNumber} from {fromStation} to {toStation}. Car {CarNumber}, sit {SeatNumber}.";
+      return $"Take train {TrainNumber} from {fromStation} to {toStation}. Car {CarNumber}, seat {SeatNumber}.";
     }
   }
 }
