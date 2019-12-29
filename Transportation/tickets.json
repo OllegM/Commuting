@@ -1,0 +1,53 @@
+[
+  {
+    "FromStation": "Helsinki Airport",
+    "ToStation": "Rovaniemi",
+    "TransportType": "Transportation.Flight",
+    "Transport": {
+      "FlightNumber": "AB0001",
+      "GateNumber": "16",
+      "SeatNumber": "24",
+      "BaggageCounter": "58",
+      "BaggageInstructions": null
+    }
+  },
+  {
+    "FromStation": "SPb",
+    "ToStation": "Helsinki",
+    "TransportType": "Transportation.Train",
+    "Transport": {
+      "TrainNumber": "001",
+      "CarNumber": "6",
+      "SeatNumber": "12"
+    }
+  },
+  {
+    "FromStation": "Moscow",
+    "ToStation": "SPb",
+    "TransportType": "Transportation.Train",
+    "Transport": {
+      "TrainNumber": "011",
+      "CarNumber": "8",
+      "SeatNumber": "22"
+    }
+  },
+  {
+    "FromStation": "Novosibirsk",
+    "ToStation": "Moscow",
+    "TransportType": "Transportation.Train",
+    "Transport": {
+      "TrainNumber": "210",
+      "CarNumber": "2",
+      "SeatNumber": "42"
+    }
+  },
+  {
+    "FromStation": "Helsinki",
+    "ToStation": "Helsinki Airport",
+    "TransportType": "Transportation.Bus",
+    "Transport": {
+      "BusNumber": "airport",
+      "SeatNumber": null
+    }
+  }
+]

@@ -13,7 +13,7 @@ namespace Transportation.Tests
     [Test]
     public void Test1()
     {
-      var tickets = new List<Ticket<Transport>>();
+      var tickets = new List<Ticket>();
 
       Train train = new Train()
       {
@@ -22,31 +22,31 @@ namespace Transportation.Tests
         SeatNumber = "0"
       };
 
-      tickets.Add(new Ticket<Transport>(train)
+      tickets.Add(new Ticket(train)
       {
         FromStation = "Helsinki",
         ToStation = "Rovaniemi"
       });
 
-      tickets.Add(new Ticket<Transport>(train)
+      tickets.Add(new Ticket(train)
       {
         FromStation = "SPb",
         ToStation = "Helsinki"
       });
 
-      tickets.Add(new Ticket<Transport>(train)
+      tickets.Add(new Ticket(train)
       {
         FromStation = "Moscow",
         ToStation = "SPb"
       });
 
-      tickets.Add(new Ticket<Transport>(train)
+      tickets.Add(new Ticket(train)
       {
         FromStation = "Novosibirsk",
         ToStation = "Moscow"
       });
 
-      Sorter<Transport>.SortTickets(tickets);
+      Sorter.SortTickets(tickets);
 
       Assert.That(tickets[0].FromStation, Is.EqualTo("Novosibirsk"));
       Assert.That(tickets[1].FromStation, Is.EqualTo("Moscow"));
