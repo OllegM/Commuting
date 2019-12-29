@@ -10,14 +10,47 @@ namespace Transportation
   {
     static void Main(string[] args)
     {
-      // прочитать билеты из JSON файла
-      string ticketsString = File.ReadAllText(@"./Transportation/tickets.json");
+      if (args.Length == 0)
+      {
+        // Отобразить справку
+        PrintUsage();
+        return;
+      }
+
+      if (args[0].ToLower() == "example")
+      {
+        // Сгеренировать пример JSON с билетами
+        GenerateCards();
+        return;
+      }
+
+      string ticketsString;
+      // прочитать JSON файл с несортированными билетами
+      if (File.Exists(args[0]))
+      {
+        ticketsString = File.ReadAllText(args[0]);
+      }
+      else
+      {
+        Console.WriteLine($"File not found: {args[0]}");
+        return;
+      }
 
       var options = new JsonSerializerOptions();
       // подключаем свой конвертер для JSON с билетами
       options.Converters.Add(new TicketConverter());
+
+      List<Ticket> tickets = null;
       // десериализация JSON файла
-      List<Ticket> tickets = JsonSerializer.Deserialize<List<Ticket>>(ticketsString, options);
+      try
+      {
+        tickets = JsonSerializer.Deserialize<List<Ticket>>(ticketsString, options);
+      }
+      catch (System.Exception ex)
+      {
+        Console.WriteLine($"Error reaing JSON file: {ex.Message}");
+        return;
+      }
 
       // сортировка билетов
       Sorter.SortTickets(tickets);
@@ -27,9 +60,13 @@ namespace Transportation
       {
         Console.WriteLine(ticket.PrintInstructions());
       }
+    }
 
-      // Сгеренировать пример JSON с билетами
-      // GenerateCards();
+    private static void PrintUsage()
+    {
+      Console.WriteLine("Использование:");
+      Console.WriteLine("Transportation [filename] - Чтение JSON файла и сортировка билетов");
+      Console.WriteLine("Transportation example - вывод на экран примера JSON файла");
     }
 
     static void GenerateCards()
