@@ -8,31 +8,48 @@ namespace Transportation
 {
   class Program
   {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
-      if (args.Length == 0)
-      {
-        // Отобразить справку
-        PrintUsage();
-        return;
-      }
+		if (ArgumentsAreEmpty(args)) 
+		{
+		    PrintUsage();
+		}
+		else if (RequestForSample(args[0]))
+		{
+			GenerateSampleJSON();
+		} 
+		else 
+		{
+			ProcessTickets(args[0]);
+		}
+	}
+	
+	private static bool ArgumentsAreEmpty(string[] args) {
+		return args.Length == 0;
+	}
+	
+	private static bool RequestForSample(string arg) {
+		return arg.ToLower() == "example";
+	}
 
-      if (args[0].ToLower() == "example")
-      {
-        // Сгеренировать пример JSON с билетами
-        GenerateCards();
-        return;
-      }
+    private static void PrintUsage()
+    {
+      Console.WriteLine("Использование:");
+      Console.WriteLine("Transportation [filename] - Чтение JSON файла и сортировка билетов");
+      Console.WriteLine("Transportation example - вывод на экран примера JSON файла");
+    }
+	
+	private static void ProcessTickets(string fileName) {
 
       string ticketsString;
       // прочитать JSON файл с несортированными билетами
-      if (File.Exists(args[0]))
+      if (File.Exists(fileName))
       {
-        ticketsString = File.ReadAllText(args[0]);
+        ticketsString = File.ReadAllText(fileName);
       }
       else
       {
-        Console.WriteLine($"File not found: {args[0]}");
+        Console.WriteLine($"File not found: {fileName}");
         return;
       }
 
@@ -61,15 +78,8 @@ namespace Transportation
         Console.WriteLine(ticket.PrintInstructions());
       }
     }
-
-    private static void PrintUsage()
-    {
-      Console.WriteLine("Использование:");
-      Console.WriteLine("Transportation [filename] - Чтение JSON файла и сортировка билетов");
-      Console.WriteLine("Transportation example - вывод на экран примера JSON файла");
-    }
-
-    static void GenerateCards()
+	
+    private static void GenerateSampleJSON()
     {
       var tickets = new List<Ticket>();
 
